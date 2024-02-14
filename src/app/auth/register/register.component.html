@@ -2,13 +2,13 @@
   <div>
     <label>
       FName:
-      <input formControlName="fname" placeholder="Your fname">
+      <input formControlName="first_name" placeholder="Your fname">
     </label>
   </div>
   <div>
     <label>
       LName:
-      <input formControlName="lname" placeholder="Your lname">
+      <input formControlName="last_name" placeholder="Your lname">
     </label>
   </div>
   <div>
@@ -26,10 +26,11 @@
   <div>
     <label>
       CPassword:
-      <input formControlName="cpassword" placeholder="Your confirm password">
+      <input formControlName="password_confirm" placeholder="Your confirm password">
     </label>
   </div>
   <button type="submit" (click)="submitForm()">Send</button>
 </form>
 
 <button [routerLink]="'../login'">Login</button>
+<button [routerLink]="'../home'">Home</button>

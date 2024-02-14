@@ -1,5 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -9,21 +11,26 @@ import {FormControl, FormGroup} from '@angular/forms';
 export class RegisterComponent implements OnInit {
   myForm: any;
 
+  constructor(
+    private http: HttpClient,
+    private router: Router
+  ) {}
+
   ngOnInit() {
     this.myForm = new FormGroup({
-      fname: new FormControl(''),
-      lname: new FormControl(''),
+      first_name: new FormControl(''),
+      last_name: new FormControl(''),
       email: new FormControl(''),
       password: new FormControl(''),
-      cpassword: new FormControl('')
+      password_confirm: new FormControl('')
     });
   }
 
   submitForm() {
-    console.log('fname', this.myForm.value.fname);
-    console.log('lname', this.myForm.value.lname);
-    console.log('email', this.myForm.value.email);
-    console.log('password', this.myForm.value.password);
-    console.log('cpassword', this.myForm.value.cpassword);
+
+  this.http.post('http://localhost:8000/api/register', this.myForm.getRawValue()).subscribe(a => {
+    console.log(a);
+    this.router.navigate(['/login']);
+  });
   }
 }
