@@ -1,18 +1,24 @@
-<form [formGroup]="myForm">
+<form [formGroup]="myForm" class="form-container">
   <div>
-    <label>
-      Email:
-      <input formControlName="email" placeholder="Your email">
-    </label>
+    <app-input-field formControlName="email"
+                     [required]="true"
+                     [email]="true"
+                     [placeholder]="'Your email'"
+                     label="Email">
+    </app-input-field>
+
+    <app-input-field formControlName="password"
+                     [required]="true"
+                     [placeholder]="'Your password'"
+                     label="Password">
+    </app-input-field>
+
+
+    <button type="submit" (click)="submitForm()">Send</button>
   </div>
-  <div>
-    <label>
-      Password:
-      <input formControlName="password" placeholder="Your password">
-    </label>
+  <div class="container" style="background-color:#f1f1f1; padding: 16px; border-bottom-left-radius: 10px; border-bottom-right-radius: 10px">
+    <span class="psw">Don't have an account? <a [routerLink]="'../register'">Sign up</a></span>
   </div>
-  <button type="submit" (click)="submitForm()">Send</button>
 </form>
 
-<button [routerLink]="'../register'">Register</button>
-<button [routerLink]="'../home'">Home</button>
+
