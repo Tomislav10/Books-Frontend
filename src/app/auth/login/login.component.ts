@@ -1,7 +1,7 @@
-import {HttpClient} from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup} from '@angular/forms';
 import {Router} from '@angular/router';
+import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-login',
@@ -12,9 +12,10 @@ export class LoginComponent implements OnInit {
   myForm: any;
 
   constructor(
-    private http: HttpClient,
-    private router: Router
-  ) {}
+    private router: Router,
+    private authService: AuthService
+  ) {
+  }
 
   ngOnInit() {
     this.myForm = new FormGroup({
@@ -24,8 +25,11 @@ export class LoginComponent implements OnInit {
   }
 
   submitForm() {
-    this.http.post('http://localhost:8000/api/login', this.myForm.getRawValue()).subscribe(a => {
-      console.log(a);
+    this.authService.login(this.myForm.getRawValue()).subscribe((res: any) => {
+      console.log('----login----');
+      console.log(res);
+      console.log('----login----');
+      this.authService.accessToken = res.token;
       this.router.navigate(['/home']);
     });
   }
