@@ -1,0 +1,35 @@
+<form [formGroup]="myForm">
+  <div>
+    <label>
+      FName:
+      <input formControlName="fname" placeholder="Your fname">
+    </label>
+  </div>
+  <div>
+    <label>
+      LName:
+      <input formControlName="lname" placeholder="Your lname">
+    </label>
+  </div>
+  <div>
+    <label>
+      Email
+      <input formControlName="email" placeholder="Your email">
+    </label>
+  </div>
+  <div>
+    <label>
+      Password:
+      <input formControlName="password" placeholder="Your password">
+    </label>
+  </div>
+  <div>
+    <label>
+      CPassword:
+      <input formControlName="cpassword" placeholder="Your confirm password">
+    </label>
+  </div>
+  <button type="submit" (click)="submitForm()">Send</button>
+</form>
+
+<button [routerLink]="'../login'">Login</button>
