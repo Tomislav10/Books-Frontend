@@ -10,14 +10,13 @@ export class IceAndFireComponent implements OnInit {
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
-    this.authService.user().subscribe({
-      next: res => {
-        console.log(res);
-      },
-      error: err => {
-        console.log(err);
-        alert('you are not Authenticated')
-      }
+
+  }
+
+  aaaa() {
+    console.log(this.authService.accessToken);
+    this.authService.user().subscribe(a => {
+      console.log(a);
     })
   }
 }

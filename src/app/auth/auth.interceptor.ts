@@ -5,34 +5,41 @@ import {AuthService} from './auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+  refresh = false;
+
   constructor(private authService: AuthService) {
   }
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    console.log('----accessToken----');
-    console.log(this.authService.accessToken);
-    console.log('----accessToken----');
-    const request = req.clone({
-      setHeaders: {
-        Authorization: `Bearer ${this.authService.accessToken}`
-      }
-    });
+    const accessToken = this.authService.accessToken;
 
-    return next.handle(request).pipe(catchError((err: HttpErrorResponse) => {
-      if (err.status === 401) {
-        return this.authService.refresh().pipe(
-          switchMap((res: any) => {
-            this.authService.accessToken = res.token;
+    if(accessToken){
+      const request = req.clone({
+        setHeaders: {
+          Authorization: `Bearer ${accessToken}`
+        }
+      });
 
-            return next.handle(request.clone({
-              setHeaders: {
-                Authorization: `Bearer ${this.authService.accessToken}`
-              }
-            }));
-          })
-        )
-      }
-      return throwError(() => err);
-    }))
+      return next.handle(request).pipe(catchError((err: HttpErrorResponse) => {
+        if (err.status === 401 && !this.refresh) {
+          this.refresh = true;
+          return this.authService.refresh().pipe(
+            switchMap((res: any) => {
+              this.authService.accessToken = res.token;
+              return next.handle(request.clone({
+                setHeaders: {
+                  Authorization: `Bearer ${accessToken}`
+                }
+              }));
+            })
+          )
+        }
+
+        this.refresh = false;
+        return throwError(() => err);
+      }))
+    }
+
+    return next.handle(req)
   }
 }

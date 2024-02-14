@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
   providedIn: 'root'
 })
 export class AuthService {
-  accessToken = '';
+  accessToken?: string;
 
   constructor(
     private http: HttpClient
@@ -26,5 +26,9 @@ export class AuthService {
 
   refresh() {
     return this.http.post('http://localhost:8000/api/refresh', {}, {withCredentials: true});
+  }
+
+  logout() {
+    return this.http.post('http://localhost:8000/api/logout', {}, {withCredentials: true});
   }
 }
