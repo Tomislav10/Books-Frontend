@@ -2,7 +2,7 @@ import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {InputFieldComponent} from './input-field/input-field.component';
-import {HeaderComponent} from './layout/header.component';
+import {HeaderComponent} from './layout/header/header.component';
 
 @NgModule({
   imports: [
