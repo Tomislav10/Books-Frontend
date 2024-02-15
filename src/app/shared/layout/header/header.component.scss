@@ -1,12 +1,20 @@
-.centered-text {
-  padding-left: 85px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 1;
-}
+mat-toolbar {
+  position: fixed;
+  z-index: 2;
+  top: 0;
+  left: 0;
+  right: 0;
 
-.header-button {
-  margin-right: 5px;
-  max-width: 80px;
+  .centered-text {
+    padding-left: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+  }
+
+  .header-button {
+    margin-right: 5px;
+    max-width: 80px;
+  }
 }

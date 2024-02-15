@@ -3,6 +3,7 @@ import {MatCardModule} from '@angular/material/card';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTabsModule} from '@angular/material/tabs';
 import {BooksListComponent} from './books-list/books-list.component';
+import {FavoriteBooksListComponent} from './favorite-books-list/favorite-books-list.component';
 
 @Component({
   selector: 'app-books',
@@ -13,7 +14,8 @@ import {BooksListComponent} from './books-list/books-list.component';
     MatTabsModule,
     MatIconModule,
     MatCardModule,
-    BooksListComponent
+    BooksListComponent,
+    FavoriteBooksListComponent
   ],
 })
 export class BooksComponent {

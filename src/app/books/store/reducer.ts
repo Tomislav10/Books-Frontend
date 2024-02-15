@@ -13,6 +13,10 @@ export function booksReducer(
   if (action instanceof GetBooksListSuccess) {
     return {...booksState, booksList: action.data};
   }
+/*
+  if (action instanceof GetItemSuccess) {
+    return {...booksState, currentContact: action.data};
+  }*/
 
   return booksState;
 }
