@@ -7,8 +7,7 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  public accessToken?: string;
-  public isLogged$: BehaviorSubject<boolean> = new BehaviorSubject(false);
+  public accessToken$: BehaviorSubject<string | undefined> = new BehaviorSubject<string | undefined>(undefined);
 
   constructor(
     private http: HttpClient

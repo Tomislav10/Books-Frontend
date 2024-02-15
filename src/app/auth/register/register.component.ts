@@ -9,7 +9,7 @@ import {AuthService} from '../auth.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  public myForm: any;
+  public registerForm!: FormGroup;
   public errorMessage?: string;
 
   constructor(
@@ -19,7 +19,7 @@ export class RegisterComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    this.myForm = new FormGroup({
+    this.registerForm = new FormGroup({
       first_name: new FormControl(''),
       last_name: new FormControl(''),
       email: new FormControl(''),
@@ -29,12 +29,12 @@ export class RegisterComponent implements OnInit {
   }
 
   public submitForm(): void {
-    const { password, password_confirm } = this.myForm.value;
+    const { password, password_confirm } = this.registerForm.value;
 
-    this.myForm.markAsTouched();
-    if (this.myForm.valid) {
+    this.registerForm.markAsTouched();
+    if (this.registerForm.valid) {
       if (password === password_confirm) {
-        this.authService.register(this.myForm.getRawValue()).subscribe({
+        this.authService.register(this.registerForm.getRawValue()).subscribe({
           next: () => {
             this.router.navigate(['/login']);
           },

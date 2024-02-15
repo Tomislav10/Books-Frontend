@@ -8,7 +8,7 @@ import {AuthService} from '../../auth/auth.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent {
-  public isVisible$ = this.authService.isLogged$;
+  public isVisible$ = this.authService.accessToken$;
 
   constructor(
     private authService: AuthService,
@@ -18,8 +18,7 @@ export class HeaderComponent {
 
   public logOut(): void {
     this.authService.logout().subscribe(() => {
-      this.authService.accessToken = undefined;
-      this.authService.isLogged$.next(false);
+      this.authService.accessToken$.next(undefined);
       this.router.navigate(['/login']);
     });
   }

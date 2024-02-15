@@ -31,8 +31,7 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.getRawValue()).subscribe({
         next: (res: { token?: string }) => {
-          this.authService.accessToken = res.token;
-          this.authService.isLogged$.next(true);
+          this.authService.accessToken$.next(res.token);
           this.router.navigate(['/home']);
         },
         error: (err) => {

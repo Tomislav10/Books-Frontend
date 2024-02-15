@@ -1,34 +1,34 @@
-<form [formGroup]="myForm" class="form-container">
+<form [formGroup]="registerForm" class="form-container">
   <div>
     <app-input-field formControlName="first_name"
                      [required]="true"
-                     [touched]="myForm.touched"
+                     [touched]="registerForm.touched"
                      [placeholder]="'Your first name'"
                      label="First name">
     </app-input-field>
     <app-input-field formControlName="last_name"
                      [required]="true"
-                     [touched]="myForm.touched"
+                     [touched]="registerForm.touched"
                      [placeholder]="'Your last name'"
                      label="Last name">
     </app-input-field>
     <app-input-field formControlName="email"
                      [required]="true"
-                     [touched]="myForm.touched"
+                     [touched]="registerForm.touched"
                      [email]="true"
                      [placeholder]="'Your email'"
                      label="Email">
     </app-input-field>
     <app-input-field formControlName="password"
                      [required]="true"
-                     [touched]="myForm.touched"
+                     [touched]="registerForm.touched"
                      [type]="'password'"
                      [placeholder]="'Your password'"
                      label="Password">
     </app-input-field>
     <app-input-field formControlName="password_confirm"
                      [required]="true"
-                     [touched]="myForm.touched"
+                     [touched]="registerForm.touched"
                      [type]="'password'"
                      [placeholder]="'Confirm password'"
                      label="Confirm password">
