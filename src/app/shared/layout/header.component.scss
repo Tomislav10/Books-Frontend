@@ -1,17 +1,12 @@
-.header {
-  height: 60px;
-  width: 100%;
-  background: linear-gradient(182.65deg, #4ac092 0%, #04AA6D 99.98%, #04AA6D 100%);
-  padding: 10px;
-  text-align: end;
-  img {
-    padding-top: 19px;
-  }
+.centered-text {
+  padding-left: 85px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
 }
 
-.logout-btn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #163d9a;
-  margin-right: 50px;
+.header-button {
+  margin-right: 5px;
+  max-width: 80px;
 }

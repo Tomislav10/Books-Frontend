@@ -10,7 +10,7 @@ import {HeaderComponent} from './layout/header.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  declarations: [InputFieldComponent, HeaderComponent],
-  exports: [InputFieldComponent, HeaderComponent]
+  declarations: [InputFieldComponent],
+  exports: [InputFieldComponent]
 })
 export class SharedModule {}

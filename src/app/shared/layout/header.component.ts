@@ -1,4 +1,8 @@
-import {Component} from '@angular/core';
+import {AsyncPipe, NgIf} from '@angular/common';
+import {Component, inject} from '@angular/core';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
 import {Router} from '@angular/router';
 import {AuthService} from '../../auth/auth.service';
 
@@ -6,15 +10,14 @@ import {AuthService} from '../../auth/auth.service';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
+  standalone: true,
+  imports: [MatToolbarModule, MatButtonModule, MatIconModule, NgIf, AsyncPipe],
 })
 export class HeaderComponent {
-  public isVisible$ = this.authService.accessToken$;
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {
-  }
+  public isVisible$ = this.authService.accessToken$;
 
   public logOut(): void {
     this.authService.logout().subscribe(() => {

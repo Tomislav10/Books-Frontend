@@ -1,3 +1,6 @@
-<div class="header" *ngIf="isVisible$ | async">
-  <button type="button" class="logout-btn" (click)="logOut()">Log out</button>
-</div>
+<mat-toolbar color="primary" *ngIf="isVisible$ | async">
+  <mat-toolbar-row>
+    <span class="centered-text">Ice and fire</span>
+    <button mat-raised-button class="header-button" (click)="logOut()">Log out</button>
+  </mat-toolbar-row>
+</mat-toolbar>
