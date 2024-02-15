@@ -1,6 +1,7 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {environment} from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -15,22 +16,22 @@ export class AuthService {
   }
 
   public register(body: any): Observable<any> {
-    return this.http.post('http://localhost:8000/api/register', body);
+    return this.http.post(`${environment.api}/register`, body);
   }
 
   public login(body: any): Observable<any> {
-    return this.http.post('http://localhost:8000/api/login', body, {withCredentials: true});
+    return this.http.post(`${environment.api}/login`, body, {withCredentials: true});
   }
 
   public user(): Observable<any> {
-    return this.http.get('http://localhost:8000/api/user');
+    return this.http.get(`${environment.api}/user`);
   }
 
   public refresh(): Observable<any> {
-    return this.http.post('http://localhost:8000/api/refresh', {}, {withCredentials: true});
+    return this.http.post(`${environment.api}/refresh`, {}, {withCredentials: true});
   }
 
   public logout(): Observable<any> {
-    return this.http.post('http://localhost:8000/api/logout', {}, {withCredentials: true});
+    return this.http.post(`${environment.api}/logout`, {}, {withCredentials: true});
   }
 }
