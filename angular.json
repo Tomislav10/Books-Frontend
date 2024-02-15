@@ -6,7 +6,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "IceAndFireApp": {
+    "BooksApp": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -78,7 +78,7 @@
               "browserTarget": "IceAndFireApp:build:production"
             },
             "development": {
-              "browserTarget": "IceAndFireApp:build:development"
+              "browserTarget": "BooksApp:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -86,7 +86,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "IceAndFireApp:build"
+            "browserTarget": "BooksApp:build"
           }
         },
         "test": {
