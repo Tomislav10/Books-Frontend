@@ -31,6 +31,7 @@ export class InputFieldComponent implements ControlValueAccessor, Validator {
   private readonly blur = new EventEmitter();
 
   @Input() public label?: string;
+  @Input() public type: string = 'text';
   @Input() public placeholder: string = '';
 
   @Input()

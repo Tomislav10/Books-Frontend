@@ -1,36 +1,43 @@
-<form [formGroup]="myForm">
+<form [formGroup]="myForm" class="form-container">
   <div>
-    <label>
-      FName:
-      <input formControlName="first_name" placeholder="Your fname">
-    </label>
-  </div>
-  <div>
-    <label>
-      LName:
-      <input formControlName="last_name" placeholder="Your lname">
-    </label>
-  </div>
-  <div>
-    <label>
-      Email
-      <input formControlName="email" placeholder="Your email">
-    </label>
-  </div>
-  <div>
-    <label>
-      Password:
-      <input formControlName="password" placeholder="Your password">
-    </label>
-  </div>
-  <div>
-    <label>
-      CPassword:
-      <input formControlName="password_confirm" placeholder="Your confirm password">
-    </label>
-  </div>
-  <button type="submit" (click)="submitForm()">Send</button>
-</form>
+    <app-input-field formControlName="first_name"
+                     [required]="true"
+                     [touched]="myForm.touched"
+                     [placeholder]="'Your first name'"
+                     label="First name">
+    </app-input-field>
+    <app-input-field formControlName="last_name"
+                     [required]="true"
+                     [touched]="myForm.touched"
+                     [placeholder]="'Your last name'"
+                     label="Last name">
+    </app-input-field>
+    <app-input-field formControlName="email"
+                     [required]="true"
+                     [touched]="myForm.touched"
+                     [email]="true"
+                     [placeholder]="'Your email'"
+                     label="Email">
+    </app-input-field>
+    <app-input-field formControlName="password"
+                     [required]="true"
+                     [touched]="myForm.touched"
+                     [type]="'password'"
+                     [placeholder]="'Your password'"
+                     label="Password">
+    </app-input-field>
+    <app-input-field formControlName="password_confirm"
+                     [required]="true"
+                     [touched]="myForm.touched"
+                     [type]="'password'"
+                     [placeholder]="'Confirm password'"
+                     label="Confirm password">
+    </app-input-field>
 
-<button [routerLink]="'../login'">Login</button>
-<button [routerLink]="'../home'">Home</button>
+    <span *ngIf="errorMessage" class="error-message">{{ errorMessage }}</span>
+    <button type="submit" (click)="submitForm()">Sign up</button>
+  </div>
+  <div class="additional-info">
+    <span>Already have an account? <a [routerLink]="'../login'">Log in</a></span>
+  </div>
+</form>

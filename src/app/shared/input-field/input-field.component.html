@@ -1,31 +1,7 @@
-<!--<div class="input-container">
-  <label for="customInput" class="error-label">
-    <span
-      class="error-text"
-      *ngIf="field.touched && field.hasError('required');else email">
-      {{label}} is required
-    </span>
-    <ng-template #email>
-      <span
-        class="error-text"
-        *ngIf="field.touched && field.hasError('notValidEmail')">
-        Email is not valid
-      </span>
-    </ng-template>
-    <input
-      id="customInput"
-      [ngClass]="field.touched && !field.valid ? 'field-error' : undefined"
-      [formControl]="field"
-      type="text"
-      maxlength="30"
-      [placeholder]="label">
-  </label>
-</div>-->
-
 <div class="input-container">
   <label class="error-label">{{label}}:
 
-    <input type="text"
+    <input [type]="type"
            [formControl]="field"
            [ngClass]="field.touched && !field.valid ? 'field-error' : undefined"
            [placeholder]="placeholder">

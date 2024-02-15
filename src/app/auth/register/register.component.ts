@@ -9,7 +9,8 @@ import {AuthService} from '../auth.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  myForm: any;
+  public myForm: any;
+  public errorMessage?: string;
 
   constructor(
     private authService: AuthService,
@@ -17,7 +18,7 @@ export class RegisterComponent implements OnInit {
   ) {
   }
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.myForm = new FormGroup({
       first_name: new FormControl(''),
       last_name: new FormControl(''),
@@ -27,10 +28,25 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  submitForm() {
-    this.authService.register(this.myForm.getRawValue()).subscribe(a => {
-      console.log(a);
-      this.router.navigate(['/login']);
-    });
+  public submitForm(): void {
+    const { password, password_confirm } = this.myForm.value;
+
+    this.myForm.markAsTouched();
+    if (this.myForm.valid) {
+      if (password === password_confirm) {
+        this.authService.register(this.myForm.getRawValue()).subscribe({
+          next: () => {
+            this.router.navigate(['/login']);
+          },
+          error: (err) => {
+            this.errorMessage = err.error.message;
+          }
+        });
+      } else {
+        this.errorMessage = 'Password and Confirm password are not same!'
+      }
+    } else {
+      this.errorMessage = undefined;
+    }
   }
 }

@@ -9,28 +9,30 @@ import {AuthService} from '../auth.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  myForm: any;
-  errorMessage?: string;
+  public loginForm!: FormGroup;
+  public errorMessage?: string;
 
   constructor(
     private router: Router,
     private authService: AuthService,
   ) {
+
   }
 
-  ngOnInit() {
-    this.myForm = new FormGroup({
+  public ngOnInit(): void {
+    this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required])
     });
   }
 
-  submitForm() {
-    this.myForm.markAsTouched();
-    if (this.myForm.valid) {
-      this.authService.login(this.myForm.getRawValue()).subscribe({
-        next: (res: any) => {
+  public submitForm(): void {
+    this.loginForm.markAsTouched();
+    if (this.loginForm.valid) {
+      this.authService.login(this.loginForm.getRawValue()).subscribe({
+        next: (res: { token?: string }) => {
           this.authService.accessToken = res.token;
+          this.authService.isLogged$.next(true);
           this.router.navigate(['/home']);
         },
         error: (err) => {

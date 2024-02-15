@@ -1,0 +1,26 @@
+.form-container {
+  div {
+    padding: 20px;
+  }
+
+  font-family: Arial, Helvetica, sans-serif;
+  border-radius: 10px;
+  background-color: #fefefe;
+  margin: 5% auto 15% auto;
+  border: 1px solid #888;
+  max-width: 750px;
+  width: 80%;
+
+  .additional-info {
+    background-color:#f1f1f1;
+    padding: 16px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px
+  }
+
+  .error-message {
+    display: block;
+    text-align: center;
+    color: red;
+  }
+}

@@ -1,22 +1,22 @@
-<form [formGroup]="myForm" class="form-container">
+<form [formGroup]="loginForm" class="form-container">
   <div>
     <app-input-field formControlName="email"
                      [required]="true"
-                     [touched]="myForm.touched"
+                     [touched]="loginForm.touched"
                      [email]="true"
                      [placeholder]="'Your email'"
                      label="Email">
     </app-input-field>
-
     <app-input-field formControlName="password"
                      [required]="true"
-                     [touched]="myForm.touched"
+                     [touched]="loginForm.touched"
+                     [type]="'password'"
                      [placeholder]="'Your password'"
                      label="Password">
     </app-input-field>
 
     <span *ngIf="errorMessage" class="error-message">{{ errorMessage }}</span>
-    <button type="submit" (click)="submitForm()">Send</button>
+    <button type="submit" (click)="submitForm()">Log in</button>
   </div>
   <div class="additional-info">
     <span class="psw">Don't have an account? <a [routerLink]="'../register'">Sign up</a></span>

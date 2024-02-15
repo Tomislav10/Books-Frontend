@@ -1,34 +1,36 @@
 import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  accessToken?: string;
+  public accessToken?: string;
+  public isLogged$: BehaviorSubject<boolean> = new BehaviorSubject(false);
 
   constructor(
     private http: HttpClient
   ) {
   }
 
-  register(body: any) {
+  public register(body: any): Observable<any> {
     return this.http.post('http://localhost:8000/api/register', body);
   }
 
-  login(body: any) {
+  public login(body: any): Observable<any> {
     return this.http.post('http://localhost:8000/api/login', body, {withCredentials: true});
   }
 
-  user() {
+  public user(): Observable<any> {
     return this.http.get('http://localhost:8000/api/user');
   }
 
-  refresh() {
+  public refresh(): Observable<any> {
     return this.http.post('http://localhost:8000/api/refresh', {}, {withCredentials: true});
   }
 
-  logout() {
+  public logout(): Observable<any> {
     return this.http.post('http://localhost:8000/api/logout', {}, {withCredentials: true});
   }
 }
