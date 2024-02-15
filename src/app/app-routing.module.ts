@@ -14,8 +14,8 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     path: 'home',
     loadChildren: () =>
-      import('./ice-and-fire/ice-and-fire.module').then(
-        m => m.IceAndFireModule
+      import('./books/books.module').then(
+        m => m.BooksModule
       )
   }
 ];

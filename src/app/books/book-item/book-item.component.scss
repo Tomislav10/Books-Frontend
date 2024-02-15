@@ -1,0 +1,12 @@
+mat-card {
+  padding: 5px;
+  max-width: 98%;
+  margin: 25px auto;
+
+  mat-card-header {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 90%;
+  }
+}
