@@ -10,11 +10,11 @@ import {AuthService} from '../auth.service';
 })
 export class LoginComponent implements OnInit {
   myForm: any;
+  errorMessage?: string;
 
   constructor(
     private router: Router,
-    private authService: AuthService
-
+    private authService: AuthService,
   ) {
   }
 
@@ -26,12 +26,18 @@ export class LoginComponent implements OnInit {
   }
 
   submitForm() {
-    console.log('aaaaa');
-    console.log(this.myForm.valid);
-    console.log(this.myForm);
-    /*this.authService.login(this.myForm.getRawValue()).subscribe((res: any) => {
-      this.authService.accessToken = res.token;
-      this.router.navigate(['/home']);
-    });*/
+    this.myForm.markAsTouched();
+    if (this.myForm.valid) {
+      this.authService.login(this.myForm.getRawValue()).subscribe({
+        next: (res: any) => {
+          this.authService.accessToken = res.token;
+          this.router.navigate(['/home']);
+        },
+        error: (err) => {
+          this.errorMessage = err.error.message;
+        }
+      });
+    }
+    this.errorMessage = undefined;
   }
 }

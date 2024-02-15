@@ -1,7 +1,9 @@
 import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
 import {
   ControlValueAccessor,
-  FormControl, NG_VALIDATORS, NG_VALUE_ACCESSOR,
+  FormControl,
+  NG_VALIDATORS,
+  NG_VALUE_ACCESSOR,
   ValidationErrors,
   Validator,
   Validators
@@ -45,8 +47,14 @@ export class InputFieldComponent implements ControlValueAccessor, Validator {
     }
   }
 
-  public readonly field: FormControl = new FormControl('', []);
+  @Input()
+  public set touched(value: boolean) {
+    if (value) {
+      this.field.markAsTouched();
+    }
+  }
 
+  public readonly field: FormControl = new FormControl('', []);
 
   public writeValue(value: string | undefined): void {
     this.field.setValue(value || '');
