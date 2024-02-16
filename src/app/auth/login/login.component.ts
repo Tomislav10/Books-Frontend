@@ -30,9 +30,10 @@ export class LoginComponent implements OnInit {
     this.loginForm.markAsTouched();
     if (this.loginForm.valid) {
       this.authService.login(this.loginForm.getRawValue()).subscribe({
-        next: (res: { token?: string }) => {
+        next: (res: { token: string, userId: string }) => {
+          localStorage.setItem("userId", res.userId);
           this.authService.accessToken$.next(res.token);
-          this.router.navigate(['/home']);
+          this.router.navigate(['/books']);
         },
         error: (err) => {
           this.errorMessage = err.error.message;

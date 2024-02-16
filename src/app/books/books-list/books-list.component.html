@@ -5,9 +5,7 @@
 <div class="extend-space"></div>
 <div class="book-items-container">
   <app-book-item *ngFor="let book of filteredContacts$ | async"
-                 [name]="book.name"
-                 [authors]="book.authors"
-                 [released]="book.released">
+                 [book]="book">
   </app-book-item>
 </div>
 

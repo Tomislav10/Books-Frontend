@@ -8,14 +8,7 @@ export const getAllBooks = createSelector(
   state => state && state.booksList
 );
 
-/*export const getFavoriteContacts = createSelector(
-  getAllContacts,
-  state => (state || []).filter(
-    item => item.favorite
-  )
-);
-
-export const getCurrentContact = createSelector(
+export const getFavoritesBooks = createSelector(
   selectBooksState,
-  state => state && state.currentContact
-);*/
+  state => state && state.favoritesList
+);

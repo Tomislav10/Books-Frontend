@@ -1,0 +1,10 @@
+<mat-form-field class="example-full-width">
+  <mat-label>Search</mat-label>
+  <input matInput [(ngModel)]="search" (ngModelChange)="search$.next($event)">
+</mat-form-field>
+<div class="extend-space"></div>
+<div class="book-items-container">
+  <app-book-item *ngFor="let book of filteredContacts$ | async"
+                 [book]="book">
+  </app-book-item>
+</div>

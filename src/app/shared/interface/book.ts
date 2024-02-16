@@ -1,13 +1,13 @@
 export interface Book {
   name: string;
-  authors: string[];
+  publisher: string;
   released: string;
-  favorite: boolean;
+  favorite?: boolean;
+  url: string;
 
-  url?: string;
   isbn?: string;
   numberOfPages?: string;
-  publisher?: string;
+  authors?: string[];
   country?: string;
   mediaType?: string;
   characters?: string[];

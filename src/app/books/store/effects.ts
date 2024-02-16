@@ -1,30 +1,24 @@
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
-import {map, switchMap} from 'rxjs/operators';
+import {map, mergeMap, switchMap} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
 import {BooksActions} from './action-types';
 import {
-  GET_BOOKS_LIST_REQUEST,
-  GetBooksListSuccess,
+  ADD_FAVORITES,
+  GET_BOOKS_LIST_REQUEST, GET_FAVORITES_LIST_REQUEST,
+  GetBooksListSuccess, GetFavoritesListSuccess, REMOVE_FAVORITES,
 } from './actions';
 import {Book} from '../../shared/interface/book';
 
 @Injectable()
 export class Effects {
 
-  // API endpoint
   private readonly apiEndpoint = environment.booksApi;
+  private readonly api = environment.api
 
   constructor(private action$: Actions, private http: HttpClient) {}
 
-  /*private redirectToView = createEffect(
-    () => this.action$.pipe(
-        ofType<BooksActions.RedirectToView>(REDIRECT_TO_VIEW),
-        tap(action => this.router.navigate([action.payload.redirectPath]))
-      ), { dispatch: false }
-    );
-*/
   private getBooksList = createEffect(
     () => this.action$.pipe(
       ofType<BooksActions.GetBooksListRequest>(GET_BOOKS_LIST_REQUEST),
@@ -37,60 +31,45 @@ export class Effects {
     )
   );
 
-  /*private getContact = createEffect(
+  private getFavoriteBooksList = createEffect(
     () => this.action$.pipe(
-      ofType<BooksActions.GetItemRequest>(GET_CONTACT_REQUEST),
-      switchMap((action) =>
-        this.http.get(`${this.apiEndpoint}/${action.payload.id}`)
+      ofType<BooksActions.GetFavoritesListRequest>(GET_FAVORITES_LIST_REQUEST),
+      switchMap(() =>
+        this.http.get<Book[]>(`${this.api}/get-favorites`)
           .pipe(
-            map((data: Book) => new BooksActions.GetItemSuccess(data)),
-            catchError((error: HttpErrorResponse) =>
-              of(new BooksActions.RedirectToView({redirectPath: '../../'}))
-            )
+            map((data: Book[]) => new GetFavoritesListSuccess(data))
           )
       )
-    ));*/
-
-  /*private createContact = createEffect(
-    () => this.action$.pipe(
-      ofType<BooksActions.CreateItem>(CREATE_CONTACT),
-      switchMap((action) => {
-        return this.http.post(this.apiEndpoint, action.payload.data)
-          .pipe(
-            map(() =>
-              new BooksActions.RedirectToView(
-                {redirectPath: `../../view/${action.payload.data.id}`}
-                )
-            )
-          );
-      })
     )
-  );*/
+  );
 
-  /*private deleteContact = createEffect(
+  private addFavorites = createEffect(
     () => this.action$.pipe(
-      ofType<BooksActions.DeleteItem>(DELETE_CONTACT),
+      ofType<BooksActions.AddFavorites>(ADD_FAVORITES),
       switchMap((action) => {
-        return this.http.delete(`${this.apiEndpoint}/${action.payload.id}`)
-          .pipe(
-            map((data: Book[]) => new BooksActions.GetItemsListRequest)
-          );
-      })
-    )
-  );*/
-/*
-  private updateContact = createEffect(
-    () => this.action$.pipe(
-      ofType<BooksActions.UpdateItem>(UPDATE_CONTACT),
-      switchMap((action) => {
-        return this.http.put(`${this.apiEndpoint}/${action.payload.id}`, action.payload.data)
+        return this.http.put(`${this.api}/add-favorite`, action.payload)
           .pipe(
             mergeMap(() => [
-              new BooksActions.GetItemRequest({id: (action.payload.id).toString()}),
-              new BooksActions.GetItemsListRequest
+              new BooksActions.GetBooksListRequest,
+              new BooksActions.GetFavoritesListRequest
             ])
           );
       })
     )
-  );*/
+  );
+
+  private removeFavorites = createEffect(
+    () => this.action$.pipe(
+      ofType<BooksActions.RemoveFavorites>(REMOVE_FAVORITES),
+      switchMap((action) => {
+        return this.http.post(`${this.api}/remove-favorite`, action.payload)
+          .pipe(
+            mergeMap(() => [
+              new BooksActions.GetBooksListRequest,
+              new BooksActions.GetFavoritesListRequest
+            ])
+          );
+      })
+    )
+  );
 }

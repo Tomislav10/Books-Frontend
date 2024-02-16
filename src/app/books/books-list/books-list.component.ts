@@ -3,12 +3,12 @@ import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core'
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {select, Store} from '@ngrx/store';
-import {BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, Observable, of} from 'rxjs';
+import {BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, Observable, of, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Book} from '../../shared/interface/book';
 import {BookItemComponent} from '../book-item/book-item.component';
 import {BooksState} from '../store';
-import {getAllBooks} from '../store/selector';
+import {getAllBooks, getFavoritesBooks} from '../store/selector';
 
 @Component({
   selector: 'app-books-list',
@@ -31,7 +31,21 @@ export class BooksListComponent {
   public search?: string;
   public search$: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
-  public allBooks$ = this.store.pipe(select(getAllBooks));
+  public allBooks$ = zip([
+    this.store.pipe(select(getAllBooks)),
+    this.store.pipe(select(getFavoritesBooks))
+  ]).pipe(
+    map(([books, favorites]) => {
+      const map = new Map((favorites || []).map(obj => [obj.url, obj]));
+
+      return (books || []).map(obj => ({
+        ...obj,
+        favorite: map.get(obj.url)?.favorite || obj.favorite,
+      }));
+    })
+  );
+
+
   public filteredContacts$: Observable<Book[]> = combineLatest([
     this.allBooks$,
     this.search$.pipe(

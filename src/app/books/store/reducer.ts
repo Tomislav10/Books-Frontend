@@ -1,9 +1,10 @@
 import {Action} from '@ngrx/store';
 import {Book} from '../../shared/interface/book';
-import {GetBooksListSuccess} from './actions';
+import {GetBooksListSuccess, GetFavoritesListSuccess} from './actions';
 
 export interface BooksState {
   booksList?: Book[];
+  favoritesList?: Book[];
 }
 
 export function booksReducer(
@@ -13,10 +14,10 @@ export function booksReducer(
   if (action instanceof GetBooksListSuccess) {
     return {...booksState, booksList: action.data};
   }
-/*
-  if (action instanceof GetItemSuccess) {
-    return {...booksState, currentContact: action.data};
-  }*/
+
+  if (action instanceof GetFavoritesListSuccess) {
+    return {...booksState, favoritesList: action.data};
+  }
 
   return booksState;
 }

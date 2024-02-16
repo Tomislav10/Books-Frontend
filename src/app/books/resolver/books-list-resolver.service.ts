@@ -3,7 +3,7 @@ import {ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot} from '@ang
 import {Store} from '@ngrx/store';
 import {of} from 'rxjs';
 import {BooksState} from '../store';
-import {GetBooksListRequest} from '../store/actions';
+import {GetBooksListRequest, GetFavoritesListRequest} from '../store/actions';
 
 @Injectable()
 export class BooksListResolverService implements Resolve<{}> {
@@ -12,6 +12,7 @@ export class BooksListResolverService implements Resolve<{}> {
 
   public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     this.store.dispatch(new GetBooksListRequest);
+    this.store.dispatch(new GetFavoritesListRequest);
 
     return of('NONE');
   }
