@@ -1,13 +1,15 @@
-import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
+import {NgIf} from '@angular/common';
+import {Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, forwardRef, Input, Output} from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
   NG_VALIDATORS,
-  NG_VALUE_ACCESSOR,
+  NG_VALUE_ACCESSOR, ReactiveFormsModule,
   ValidationErrors,
   Validator,
   Validators
 } from '@angular/forms';
+import {MatInputModule} from '@angular/material/input';
 
 @Component({
   selector: 'app-input-field',
@@ -24,6 +26,12 @@ import {
       useExisting: forwardRef(() => InputFieldComponent),
       multi: true
     }
+  ],
+  standalone: true,
+  imports: [
+    MatInputModule,
+    ReactiveFormsModule,
+    NgIf
   ]
 })
 export class InputFieldComponent implements ControlValueAccessor, Validator {

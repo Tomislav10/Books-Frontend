@@ -1,12 +1,27 @@
+import {NgIf} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Router} from '@angular/router';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {Router, RouterLink} from '@angular/router';
+import {InputFieldComponent} from '../../shared/input-field/input-field.component';
+import {SharedModule} from '../../shared/shared.module';
 import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
+  standalone: true,
+  imports: [
+    MatCardModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+    SharedModule,
+    RouterLink,
+    NgIf,
+    InputFieldComponent
+  ]
 })
 export class LoginComponent implements OnInit {
   public loginForm!: FormGroup;

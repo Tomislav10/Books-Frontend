@@ -12,7 +12,7 @@ export class BooksListResolverService implements Resolve<{}> {
 
   public resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     this.store.dispatch(new GetBooksListRequest);
-    this.store.dispatch(new GetFavoritesListRequest);
+    this.store.dispatch(new GetFavoritesListRequest({userId: localStorage.getItem("userId")}));
 
     return of('NONE');
   }

@@ -1,24 +1,22 @@
-<form [formGroup]="loginForm" class="form-container">
-  <div>
-    <app-input-field formControlName="email"
-                     [required]="true"
-                     [touched]="loginForm.touched"
-                     [email]="true"
-                     [placeholder]="'Your email'"
-                     label="Email">
-    </app-input-field>
-    <app-input-field formControlName="password"
-                     [required]="true"
-                     [touched]="loginForm.touched"
-                     [type]="'password'"
-                     [placeholder]="'Your password'"
-                     label="Password">
-    </app-input-field>
-
-    <span *ngIf="errorMessage" class="error-message">{{ errorMessage }}</span>
-    <button type="submit" (click)="submitForm()">Log in</button>
-  </div>
-  <div class="additional-info">
-    <span class="psw">Don't have an account? <a [routerLink]="'../register'">Sign up</a></span>
-  </div>
+<form [formGroup]="loginForm">
+  <mat-card>
+    <mat-card-title>Log in:</mat-card-title>
+    <mat-card-content>
+        <app-input-field formControlName="email"
+                         [required]="true"
+                         [email]="true"
+                         [placeholder]="'Your email'"
+                         label="Email">
+        </app-input-field>
+        <app-input-field formControlName="password"
+                         [required]="true"
+                         [type]="'password'"
+                         [placeholder]="'Your password'"
+                         label="Password">
+        </app-input-field>
+        <span *ngIf="errorMessage" class="error-message">{{ errorMessage }}</span>
+        <button mat-raised-button color="primary" (click)="submitForm()">Log in</button>
+        <p>Don't have an account? <a [routerLink]="'../register'">Sign up</a></p>
+    </mat-card-content>
+  </mat-card>
 </form>

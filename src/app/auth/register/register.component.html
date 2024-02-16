@@ -1,43 +1,38 @@
-<form [formGroup]="registerForm" class="form-container">
-  <div>
-    <app-input-field formControlName="first_name"
-                     [required]="true"
-                     [touched]="registerForm.touched"
-                     [placeholder]="'Your first name'"
-                     label="First name">
-    </app-input-field>
-    <app-input-field formControlName="last_name"
-                     [required]="true"
-                     [touched]="registerForm.touched"
-                     [placeholder]="'Your last name'"
-                     label="Last name">
-    </app-input-field>
-    <app-input-field formControlName="email"
-                     [required]="true"
-                     [touched]="registerForm.touched"
-                     [email]="true"
-                     [placeholder]="'Your email'"
-                     label="Email">
-    </app-input-field>
-    <app-input-field formControlName="password"
-                     [required]="true"
-                     [touched]="registerForm.touched"
-                     [type]="'password'"
-                     [placeholder]="'Your password'"
-                     label="Password">
-    </app-input-field>
-    <app-input-field formControlName="password_confirm"
-                     [required]="true"
-                     [touched]="registerForm.touched"
-                     [type]="'password'"
-                     [placeholder]="'Confirm password'"
-                     label="Confirm password">
-    </app-input-field>
-
-    <span *ngIf="errorMessage" class="error-message">{{ errorMessage }}</span>
-    <button type="submit" (click)="submitForm()">Sign up</button>
-  </div>
-  <div class="additional-info">
-    <span>Already have an account? <a [routerLink]="'../login'">Log in</a></span>
-  </div>
+<form [formGroup]="registerForm">
+  <mat-card>
+    <mat-card-title>Sign up:</mat-card-title>
+    <mat-card-content>
+      <app-input-field formControlName="first_name"
+                       [required]="true"
+                       [placeholder]="'Your first name'"
+                       label="First name">
+      </app-input-field>
+      <app-input-field formControlName="last_name"
+                       [required]="true"
+                       [placeholder]="'Your last name'"
+                       label="Last name">
+      </app-input-field>
+      <app-input-field formControlName="email"
+                       [required]="true"
+                       [email]="true"
+                       [placeholder]="'Your email'"
+                       label="Email">
+      </app-input-field>
+      <app-input-field formControlName="password"
+                       [required]="true"
+                       [type]="'password'"
+                       [placeholder]="'Your password'"
+                       label="Password">
+      </app-input-field>
+      <app-input-field formControlName="password_confirm"
+                       [required]="true"
+                       [type]="'password'"
+                       [placeholder]="'Confirm password'"
+                       label="Confirm password">
+      </app-input-field>
+      <span *ngIf="errorMessage" class="error-message">{{ errorMessage }}</span>
+      <button mat-raised-button color="primary" (click)="submitForm()">Sign up</button>
+      <p>Already have an account? <a [routerLink]="'../login'">Log in</a></p>
+    </mat-card-content>
+  </mat-card>
 </form>

@@ -1,37 +1,10 @@
-@import '../../../styles/variables';
-
-.input-container {
-  margin-bottom: 23px;
-
-  .field-error {
-    border: 1px solid #c40a00 !important;
-    border-radius: 5px;
-  }
-
-  .error-label {
-
-    display: grid;
-    position: relative;
-
-    .error-text {
-      position: absolute;
-      font-family: Lato;
-      font-size: 12px;
-      color: red;
-      top: 72px;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-    }
-  }
-
-
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
 }
 
-
+.example-full-width {
+  margin-bottom: 15px;
+  width: 100%;
+}

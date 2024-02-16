@@ -7,7 +7,7 @@ import {BooksActions} from './action-types';
 import {
   ADD_FAVORITES,
   GET_BOOKS_LIST_REQUEST, GET_FAVORITES_LIST_REQUEST,
-  GetBooksListSuccess, GetFavoritesListSuccess, REMOVE_FAVORITES,
+  GetBooksListSuccess, GetFavoritesListRequest, GetFavoritesListSuccess, REMOVE_FAVORITES,
 } from './actions';
 import {Book} from '../../shared/interface/book';
 
@@ -31,11 +31,12 @@ export class Effects {
     )
   );
 
+
   private getFavoriteBooksList = createEffect(
     () => this.action$.pipe(
       ofType<BooksActions.GetFavoritesListRequest>(GET_FAVORITES_LIST_REQUEST),
-      switchMap(() =>
-        this.http.get<Book[]>(`${this.api}/get-favorites`)
+      switchMap((action) =>
+        this.http.get<Book[]>(`${this.api}/get-favorites/${action.payload.userId}`)
           .pipe(
             map((data: Book[]) => new GetFavoritesListSuccess(data))
           )
@@ -51,7 +52,7 @@ export class Effects {
           .pipe(
             mergeMap(() => [
               new BooksActions.GetBooksListRequest,
-              new BooksActions.GetFavoritesListRequest
+              new BooksActions.GetFavoritesListRequest({userId: action.payload.userId})
             ])
           );
       })
@@ -66,7 +67,7 @@ export class Effects {
           .pipe(
             mergeMap(() => [
               new BooksActions.GetBooksListRequest,
-              new BooksActions.GetFavoritesListRequest
+              new BooksActions.GetFavoritesListRequest({userId: action.payload.userId})
             ])
           );
       })

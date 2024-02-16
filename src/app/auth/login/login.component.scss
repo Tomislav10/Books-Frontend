@@ -1,31 +1,29 @@
-.form-container {
-  div {
-    padding: 20px;
-  }
+mat-card {
+  max-width: 500px;
+  width: 90%;
+  margin: 150px auto;
+}
 
-  position: absolute;
-  left: 50%;
-  top: 35%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  font-family: Arial, Helvetica, sans-serif;
-  border-radius: 10px;
-  background-color: #fefefe;
-  margin: 5% auto 15% auto;
-  border: 1px solid #888;
-  max-width: 750px;
-  width: 80%;
+mat-card-title {
+  display: flex;
+  font-size: 24px;
+  font-weight: 600;
+  justify-content: center;
+  margin: 20px 0 80px 0;
+}
 
-  .additional-info {
-    background-color:#f1f1f1;
-    padding: 16px;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px
-  }
+app-input-field {
+  margin-bottom: 40px;
+}
 
-  .error-message {
-    display: block;
-    text-align: center;
-    color: red;
-  }
+button {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+.error-message {
+  display: block;
+  text-align: center;
+  color: red;
 }

@@ -21,6 +21,10 @@ export class GetBooksListSuccess implements Action {
 
 export class GetFavoritesListRequest implements Action {
   public readonly type = GET_FAVORITES_LIST_REQUEST;
+
+  constructor(public payload: {
+    userId: string | null
+  }) {}
 }
 
 export class GetFavoritesListSuccess implements Action {

@@ -1,20 +1,7 @@
-<div class="input-container">
-  <label class="error-label">{{label}}:
+<mat-form-field class="example-full-width">
+  <mat-label>{{label}}:</mat-label>
+  <input [type]="type" matInput [formControl]="field" [placeholder]="placeholder">
 
-    <input [type]="type"
-           [formControl]="field"
-           [ngClass]="field.touched && !field.valid ? 'field-error' : undefined"
-           [placeholder]="placeholder">
-    <span
-      class="error-text"
-      *ngIf="field.touched && field.hasError('required')">
-      {{label}} is required
-    </span>
-    <span
-      class="error-text"
-      *ngIf="field.touched && field.hasError('email')">
-      Invalid email format
-    </span>
-  </label>
-
-</div>
+  <mat-error *ngIf="field.hasError('email') && !field.hasError('required')">Please enter a valid email address</mat-error>
+  <mat-error *ngIf="field.hasError('required')">{{label}} is <strong>required</strong></mat-error>
+</mat-form-field>

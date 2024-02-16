@@ -1,12 +1,26 @@
+import {NgIf} from '@angular/common';
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup} from '@angular/forms';
-import {Router} from '@angular/router';
+import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
+import {Router, RouterLink} from '@angular/router';
+import {InputFieldComponent} from '../../shared/input-field/input-field.component';
 import {AuthService} from '../auth.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
+  imports: [
+    FormsModule,
+    MatButtonModule,
+    InputFieldComponent,
+    ReactiveFormsModule,
+    RouterLink,
+    NgIf,
+    MatCardModule
+  ],
+  standalone: true
 })
 export class RegisterComponent implements OnInit {
   public registerForm!: FormGroup;
