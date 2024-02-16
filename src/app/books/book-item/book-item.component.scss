@@ -2,11 +2,18 @@ mat-card {
   padding: 5px;
   max-width: 98%;
   margin: 25px auto;
+  position: relative;
 
   mat-card-header {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     max-width: 90%;
+  }
+
+  .details-button {
+    position: absolute;
+    bottom: 14px;
+    left: 20px;
   }
 }

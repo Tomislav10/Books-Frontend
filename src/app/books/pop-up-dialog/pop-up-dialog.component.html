@@ -1,0 +1,12 @@
+<h2 mat-dialog-title>Name: {{ data.book?.name }}</h2>
+<mat-dialog-content>
+  <p><b>Publisher:</b><i>  {{ data.book?.publisher }}</i></p>
+  <p><b>Country:</b> <i>  {{ data.book?.country }}</i></p>
+  <p><b>Media type:</b> <i>  {{ data.book?.mediaType }}</i></p>
+  <p><b>Number of pages:</b> <i>  {{ data.book?.numberOfPages }}</i></p>
+  <p><b>Released:</b> <i>  {{ data.book?.released | date }}</i></p>
+  <p><b>Isbn:</b> <i>  {{ data.book?.isbn }}</i></p>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

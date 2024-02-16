@@ -43,7 +43,11 @@ export class AddFavorites implements Action {
     name: string,
     publisher: string,
     released: string,
-    favorite: boolean
+    favorite?: boolean,
+    country?: string,
+    mediaType?: string,
+    numberOfPages?: string,
+    isbn?: string
   }) {}
 }
 
@@ -56,6 +60,10 @@ export class RemoveFavorites implements Action {
     name: string,
     publisher: string,
     released: string,
-    favorite: boolean
+    favorite?: boolean,
+    country?: string,
+    mediaType?: string,
+    numberOfPages?: string,
+    isbn?: string
   }) {}
 }
