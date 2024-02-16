@@ -1,7 +1,7 @@
 import {Action, combineReducers, MetaReducer} from '@ngrx/store';
 import {environment} from '../../environments/environment';
-import {AppState} from './interfaces';
 import {booksReducer} from '../books/store';
+import {AppState} from './interfaces';
 
 export function appState(state: AppState, action: Action) {
   return combineReducers({

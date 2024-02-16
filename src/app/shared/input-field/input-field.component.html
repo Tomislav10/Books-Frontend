@@ -1,7 +1,6 @@
 <mat-form-field class="example-full-width">
   <mat-label>{{label}}:</mat-label>
   <input [type]="type" matInput [formControl]="field" [placeholder]="placeholder">
-
   <mat-error *ngIf="field.hasError('email') && !field.hasError('required')">Please enter a valid email address</mat-error>
   <mat-error *ngIf="field.hasError('required')">{{label}} is <strong>required</strong></mat-error>
 </mat-form-field>

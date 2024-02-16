@@ -4,7 +4,6 @@ export interface Book {
   released: string;
   favorite?: boolean;
   url: string;
-
   isbn?: string;
   numberOfPages?: string;
   authors?: string[];

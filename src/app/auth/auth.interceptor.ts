@@ -1,16 +1,15 @@
 import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {catchError, Observable, switchMap, take, throwError} from 'rxjs';
 import {AuthService} from './auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  refresh = false;
+  private authService = inject(AuthService);
 
-  constructor(private authService: AuthService) {
-  }
+  private refresh = false;
 
-  intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+  public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return this.authService.accessToken$.pipe(
       take(1),
       switchMap((accessToken?: string) => {

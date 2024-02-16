@@ -1,11 +1,10 @@
 import {NgIf} from '@angular/common';
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {Router, RouterLink} from '@angular/router';
 import {InputFieldComponent} from '../../shared/input-field/input-field.component';
-import {SharedModule} from '../../shared/shared.module';
 import {AuthService} from '../auth.service';
 
 @Component({
@@ -17,22 +16,17 @@ import {AuthService} from '../auth.service';
     MatCardModule,
     MatButtonModule,
     ReactiveFormsModule,
-    SharedModule,
     RouterLink,
     NgIf,
     InputFieldComponent
   ]
 })
 export class LoginComponent implements OnInit {
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
   public loginForm!: FormGroup;
   public errorMessage?: string;
-
-  constructor(
-    private router: Router,
-    private authService: AuthService,
-  ) {
-
-  }
 
   public ngOnInit(): void {
     this.loginForm = new FormGroup({

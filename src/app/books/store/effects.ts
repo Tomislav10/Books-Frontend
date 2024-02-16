@@ -1,15 +1,18 @@
+import {HttpClient} from '@angular/common/http';
 import {Injectable} from '@angular/core';
 import {Actions, createEffect, ofType} from '@ngrx/effects';
 import {map, mergeMap, switchMap} from 'rxjs/operators';
-import {HttpClient} from '@angular/common/http';
 import {environment} from '../../../environments/environment';
+import {Book} from '../../shared/interface/book';
 import {BooksActions} from './action-types';
 import {
   ADD_FAVORITES,
-  GET_BOOKS_LIST_REQUEST, GET_FAVORITES_LIST_REQUEST,
-  GetBooksListSuccess, GetFavoritesListRequest, GetFavoritesListSuccess, REMOVE_FAVORITES,
+  GET_BOOKS_LIST_REQUEST,
+  GET_FAVORITES_LIST_REQUEST,
+  GetBooksListSuccess,
+  GetFavoritesListSuccess,
+  REMOVE_FAVORITES,
 } from './actions';
-import {Book} from '../../shared/interface/book';
 
 @Injectable()
 export class Effects {
@@ -17,7 +20,8 @@ export class Effects {
   private readonly apiEndpoint = environment.booksApi;
   private readonly api = environment.api
 
-  constructor(private action$: Actions, private http: HttpClient) {}
+  constructor(private action$: Actions, private http: HttpClient) {
+  }
 
   private getBooksList = createEffect(
     () => this.action$.pipe(

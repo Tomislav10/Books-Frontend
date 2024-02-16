@@ -1,10 +1,11 @@
 import {NgIf} from '@angular/common';
-import {Component, CUSTOM_ELEMENTS_SCHEMA, EventEmitter, forwardRef, Input, Output} from '@angular/core';
+import {Component, EventEmitter, forwardRef, Input, Output} from '@angular/core';
 import {
   ControlValueAccessor,
   FormControl,
   NG_VALIDATORS,
-  NG_VALUE_ACCESSOR, ReactiveFormsModule,
+  NG_VALUE_ACCESSOR,
+  ReactiveFormsModule,
   ValidationErrors,
   Validator,
   Validators

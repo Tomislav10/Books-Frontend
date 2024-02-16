@@ -1,5 +1,5 @@
 import {HttpClient} from '@angular/common/http';
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 
@@ -7,12 +7,9 @@ import {environment} from '../../environments/environment';
   providedIn: 'root'
 })
 export class AuthService {
-  public accessToken$: BehaviorSubject<string | undefined> = new BehaviorSubject<string | undefined>(undefined);
+  private http = inject(HttpClient);
 
-  constructor(
-    private http: HttpClient
-  ) {
-  }
+  public accessToken$: BehaviorSubject<string | undefined> = new BehaviorSubject<string | undefined>(undefined);
 
   public register(body: any): Observable<any> {
     return this.http.post(`${environment.api}/register`, body);

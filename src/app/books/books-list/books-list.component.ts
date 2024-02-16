@@ -1,9 +1,9 @@
 import {AsyncPipe, NgForOf} from '@angular/common';
-import {ChangeDetectionStrategy, Component, inject, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
 import {select, Store} from '@ngrx/store';
-import {BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, Observable, of, zip} from 'rxjs';
+import {BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, Observable, zip} from 'rxjs';
 import {map} from 'rxjs/operators';
 import {Book} from '../../shared/interface/book';
 import {BookItemComponent} from '../book-item/book-item.component';
@@ -44,7 +44,6 @@ export class BooksListComponent {
       }));
     })
   );
-
 
   public filteredContacts$: Observable<Book[]> = combineLatest([
     this.allBooks$,

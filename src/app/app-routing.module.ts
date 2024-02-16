@@ -1,6 +1,8 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {AuthGuard} from './auth/auth.guard';
+import {LoginComponent} from './auth/login/login.component';
+import {RegisterComponent} from './auth/register/register.component';
 
 const routes: Routes = [
   {
@@ -9,11 +11,12 @@ const routes: Routes = [
     redirectTo: 'books',
   },
   {
-    path: '',
-    loadChildren: () =>
-      import('./auth/auth.module').then(
-        m => m.AuthModule
-      )
+    path: 'login',
+    component: LoginComponent,
+  },
+  {
+    path: 'register',
+    component: RegisterComponent,
   },
   {
     canActivate: [AuthGuard],
@@ -22,6 +25,11 @@ const routes: Routes = [
       import('./books/books.module').then(
         m => m.BooksModule
       )
+  },
+  {
+    path: '**',
+    pathMatch: 'full',
+    redirectTo: 'books',
   }
 ];
 

@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {inject, Injectable} from '@angular/core';
 import {CanActivate, Router} from '@angular/router';
 import {catchError, Observable, of, switchMap, take} from 'rxjs';
 import {AuthService} from './auth.service';
@@ -7,13 +7,11 @@ import {AuthService} from './auth.service';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {}
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
-  canActivate = (): Observable<boolean> => this.authService.accessToken$.pipe(
-    take(1), // Ensure we take only one value
+  public canActivate = (): Observable<boolean> => this.authService.accessToken$.pipe(
+    take(1),
     switchMap((accessToken?: string) => {
       return accessToken ? of(true) : this.authService.refresh().pipe(
         switchMap((res: { token?: string }) => {

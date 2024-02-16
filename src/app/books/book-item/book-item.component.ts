@@ -7,7 +7,7 @@ import {MatDialog, MatDialogModule} from '@angular/material/dialog';
 import {MatIconModule} from '@angular/material/icon';
 import {Store} from '@ngrx/store';
 import {Book} from '../../shared/interface/book';
-import {DialogElementsExampleDialog} from '../pop-up-dialog/pop-up-dialog.component';
+import {BookDetailsDialog} from '../book-details-dialog/book-details-dialog.component';
 import {BooksState} from '../store';
 import {AddFavorites, RemoveFavorites} from '../store/actions';
 
@@ -20,20 +20,19 @@ import {AddFavorites, RemoveFavorites} from '../store/actions';
 })
 export class BookItemComponent implements OnInit {
   private store = inject(Store<BooksState>);
-
-  constructor(public dialog: MatDialog) {}
+  private dialog = inject(MatDialog);
 
   public favorite?: boolean;
 
   @Input() book!: Book;
 
-  ngOnInit() {
+  public ngOnInit(): void {
     this.favorite = !!this.book.favorite;
   }
 
-  openDialog() {
-    this.dialog.open(DialogElementsExampleDialog, {
-      data: { book: this.book }
+  public openDialog(): void {
+    this.dialog.open(BookDetailsDialog, {
+      data: {book: this.book}
     });
   }
 

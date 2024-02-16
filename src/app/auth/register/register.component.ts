@@ -1,5 +1,5 @@
 import {NgIf} from '@angular/common';
-import {Component, OnInit} from '@angular/core';
+import {Component, inject, OnInit} from '@angular/core';
 import {FormControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -23,14 +23,11 @@ import {AuthService} from '../auth.service';
   standalone: true
 })
 export class RegisterComponent implements OnInit {
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
   public registerForm!: FormGroup;
   public errorMessage?: string;
-
-  constructor(
-    private authService: AuthService,
-    private router: Router
-  ) {
-  }
 
   public ngOnInit(): void {
     this.registerForm = new FormGroup({
@@ -43,7 +40,7 @@ export class RegisterComponent implements OnInit {
   }
 
   public submitForm(): void {
-    const { password, password_confirm } = this.registerForm.value;
+    const {password, password_confirm} = this.registerForm.value;
 
     this.registerForm.markAsTouched();
     if (this.registerForm.valid) {
